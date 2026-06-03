@@ -3,6 +3,8 @@
 Versi non-extension ala OpenClaw. Sistem berjalan lokal, membuka browser sendiri dengan Playwright, membaca Google Forms, meminta jawaban ke backend AI, lalu mengisi form.
 Dashboard sekarang memakai React JS + Vite, sedangkan backend tetap Node.js.
 
+Versi aktif: `v1.1`.
+
 ## Cara Jalan
 
 Double click:

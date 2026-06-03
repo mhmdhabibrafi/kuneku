@@ -1,6 +1,6 @@
 {
   "name": "kuneku",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "KUNEKU form automation with OpenClaw/OpenAI and optional MySQL storage",
   "main": "server.js",

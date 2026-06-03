@@ -1,5 +1,7 @@
 # KUNEKU - Paket RDP
 
+Versi aktif: `v1.1`.
+
 Paket ini dibuat supaya folder KUNEKU bisa dipindah ke RDP tanpa membawa log, report lama, password database, atau data MySQL lokal dari komputer asal.
 
 ## Cara Pindah ke RDP

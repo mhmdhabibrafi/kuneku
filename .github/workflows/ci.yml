@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build KUNEKU
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: forms-gpt-agent/package-lock.json
+
+      - name: Install dashboard dependencies
+        working-directory: forms-gpt-agent
+        run: npm ci
+
+      - name: Check backend syntax
+        working-directory: forms-gpt-agent
+        run: node --check server.js
+
+      - name: Build dashboard
+        working-directory: forms-gpt-agent
+        run: npm run build
+
+      - name: Compile control panel
+        shell: pwsh
+        run: |
+          $csc = "$env:WINDIR\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+          if (-not (Test-Path $csc)) {
+            throw "csc.exe not found at $csc"
+          }
+          & $csc `
+            /nologo /target:winexe /platform:anycpu /optimize+ `
+            /win32icon:"control-panel\kuneku.ico" `
+            /reference:System.dll `
+            /reference:System.Drawing.dll `
+            /reference:System.Windows.Forms.dll `
+            /reference:System.ServiceProcess.dll `
+            /out:"KUNEKU-ControlPanel.exe" `
+            "control-panel\KuesionerKuControlPanel.cs"
+
