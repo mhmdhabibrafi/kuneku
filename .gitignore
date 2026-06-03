@@ -1,0 +1,31 @@
+# Dependencies
+forms-gpt-agent/node_modules/
+node_modules/
+
+# Private runtime config and credentials
+forms-gpt-agent/config.json
+.env
+.env.*
+
+# Runtime output
+logs/
+reports/
+forms-gpt-agent/reports/
+playwright-report/
+test-results/
+*.log
+
+# Release packages and local archives
+_release/
+*.zip
+
+# Local database/runtime binaries
+control-panel/mysql-9.7.0-winx64/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+

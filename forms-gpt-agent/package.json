@@ -1,0 +1,23 @@
+{
+  "name": "kuneku",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KUNEKU form automation with OpenClaw/OpenAI and optional MySQL storage",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "build": "vite build",
+    "dev": "vite --host 127.0.0.1"
+  },
+  "dependencies": {
+    "lucide-react": "^1.16.0",
+    "mysql2": "^3.22.3",
+    "playwright": "^1.57.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.13"
+  }
+}

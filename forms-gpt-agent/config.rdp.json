@@ -1,0 +1,26 @@
+{
+  "systemName": "KUNEKU",
+  "ownerName": "Muhammad Habib Rafi",
+  "provider": "openclaw",
+  "baseUrl": "http://localhost:18789/v1/responses",
+  "model": "openai-codex/gpt-5.4",
+  "apiKey": "",
+  "customRulesText": "pernah menggunakan, pernah mengakses, pernah memakai, pernah mencoba, sudah menggunakan, familiar dengan => Ya\nnama, nama lengkap => Aditya Pratama | Ahmad Fauzan | Bima Saputra | Dimas Ramadhan | Fajar Nugroho | Rizky Maulana | Bagas Setiawan | Ilham Akbar | Yoga Prasetyo | Raka Firmansyah | Siti Rahmawati | Ayu Lestari | Nadia Putri | Dewi Anggraini | Nur Aisyah | Fitri Handayani | Intan Permata | Maya Safitri | Rani Oktaviani | Putri Maharani\nprogram studi, jurusan, prodi => Teknik Informatika | Teknik Industri | Sistem Informasi | Matematika | Teknik Elektro | Manajemen | Akuntansi | Hukum | Psikologi\nangkatan, tahun angkatan => 2022 | 2023 | 2024 | 2025\nrekomendasi program studi => Teknik Informatika | Teknik Industri | Sistem Informasi | Matematika | Teknik Elektro\nsaran, masukan, komentar => Sudah cukup baik dan mudah dipahami | Semoga informasinya semakin lengkap | Tampilan sudah jelas dan nyaman digunakan\nkota, domisili, asal daerah => Jakarta | Bandung | Surabaya | Yogyakarta | Semarang\nemail => responden01@gmail.com | responden02@gmail.com | responden03@gmail.com\nno hp, nomor hp, telepon, whatsapp => 081234567890 | 082112345678 | 085712345678",
+  "links": "",
+  "profiles": {},
+  "runItems": [],
+  "responsesPerLink": 1,
+  "headless": true,
+  "dryRun": true,
+  "reviewBeforeSubmit": true,
+  "storage": {
+    "type": "local",
+    "mysql": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "database": "kuneku",
+      "user": "root",
+      "password": ""
+    }
+  }
+}

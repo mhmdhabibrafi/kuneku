@@ -1,0 +1,336 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>KUNEKU</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Segoe UI, system-ui, sans-serif;
+      background: #ffffff;
+      color: #111827;
+    }
+    header {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      column-gap: 14px;
+      align-items: center;
+      padding: 22px 28px;
+      border-bottom: 1px solid #d8e3ef;
+      background: #ffffff;
+    }
+    .logo {
+      grid-row: span 2;
+      width: 54px;
+      height: 54px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: #000;
+      box-shadow: 0 10px 22px rgba(12, 192, 223, .26);
+    }
+    h1 { margin: 0; font-size: 22px; }
+    header p { margin: 6px 0 0; color: #64748b; font-size: 13px; }
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 16px;
+      background: #f6f9fd;
+    }
+    section {
+      border: 1px solid #d8e3ef;
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 14px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid #d8e3ef;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #111827;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+    input, select { height: 38px; padding: 0 10px; }
+    textarea { min-height: 116px; padding: 10px; resize: vertical; line-height: 1.45; }
+    input:focus, select:focus, textarea:focus { border-color: #0cc0df; box-shadow: 0 0 0 3px rgba(12, 192, 223, .2); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .hint { color: #64748b; font-size: 11px; margin-top: 6px; line-height: 1.45; }
+    button {
+      height: 38px;
+      border: 0;
+      border-radius: 8px;
+      color: #ffffff;
+      background: #0cc0df;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #e7fbff;
+      border: 1px solid rgba(12, 192, 223, .38);
+      color: #0cc0df;
+    }
+    button.danger {
+      background: #fff1f0;
+      border: 1px solid #fecaca;
+      color: #d92d20;
+    }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+    .status {
+      padding: 10px 12px;
+      border: 1px solid #d8e3ef;
+      border-radius: 8px;
+      background: #f1f6fd;
+      color: #334155;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+    .log {
+      height: calc(100vh - 158px);
+      min-height: 520px;
+      overflow: auto;
+      background: #f8fafc;
+      border: 1px solid #d8e3ef;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .ok { color: #067647; }
+    .warn { color: #b45309; }
+    .err { color: #d92d20; }
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      border-top: 1px solid #d8e3ef;
+      background: #f6f9fd;
+      color: #475569;
+      padding: 14px 20px 18px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+      .log { height: 420px; min-height: 420px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img class="logo" src="/images/kuneku-logo.png" alt="KUNEKU">
+    <h1>KUNEKU</h1>
+    <p>Smart form automation</p>
+  </header>
+
+  <main>
+    <div>
+      <section>
+        <h2>AI Backend</h2>
+        <label>Provider</label>
+        <select id="provider">
+          <option value="openclaw">OpenClaw Gateway (Codex OAuth)</option>
+          <option value="openai">OpenAI API Key</option>
+          <option value="custom">Custom OpenAI-Compatible</option>
+        </select>
+
+        <label>Base URL</label>
+        <input id="baseUrl" spellcheck="false">
+        <div class="hint">OpenClaw default: http://localhost:18789/v1/responses. Jalankan connect-openclaw-codex.bat dulu, lalu klik Cek Koneksi AI.</div>
+
+        <label>Model</label>
+        <input id="model" spellcheck="false">
+
+        <label>Token / API Key</label>
+        <input id="apiKey" type="password" spellcheck="false" placeholder="Boleh kosong untuk OpenClaw tanpa gateway token">
+
+        <div class="actions">
+          <button id="saveConfig">Simpan</button>
+          <button class="secondary" id="openClawDefault">OpenClaw Default</button>
+          <button class="secondary" id="testAi">Cek Koneksi AI</button>
+        </div>
+        <div class="status" id="configStatus">Siap.</div>
+      </section>
+
+      <section>
+        <h2>Google Forms</h2>
+        <label>Link Forms</label>
+        <textarea id="links" placeholder="Paste link Google Forms, satu baris satu link."></textarea>
+
+        <div class="row">
+          <div>
+            <label>Isi per link</label>
+            <input id="responsesPerLink" type="number" min="1" value="1">
+          </div>
+          <div>
+            <label>Browser</label>
+            <select id="headless">
+              <option value="false">Terlihat</option>
+              <option value="true">Headless</option>
+            </select>
+          </div>
+        </div>
+
+        <label>Aturan AI Pro</label>
+        <textarea id="rules"></textarea>
+        <div class="hint">ChatGPT membaca aturan ini. Sistem juga memaksa jawaban tetap sesuai aturan untuk field yang cocok.</div>
+
+        <div class="actions">
+          <button id="start">Mulai Sistem</button>
+          <button class="danger" id="stop">Stop</button>
+        </div>
+        <div class="status" id="runStatus">Belum jalan.</div>
+      </section>
+    </div>
+
+    <section style="margin:0;">
+      <h2>Live Log</h2>
+      <div class="log" id="log"></div>
+    </section>
+  </main>
+
+  <footer>KUNEKU. Copyright 2026 Muhammad Habib Rafi. All rights reserved.</footer>
+
+  <script>
+    const defaults = {
+      provider: 'openclaw',
+      baseUrl: 'http://localhost:18789/v1/responses',
+      model: 'openai-codex/gpt-5.4',
+      links: '',
+      customRulesText: `pernah menggunakan website seminarfst, apakah anda pernah menggunakan website seminarfst => Ya
+nama, nama lengkap => Aditya Pratama | Ahmad Fauzan | Bima Saputra | Dimas Ramadhan | Fajar Nugroho | Rizky Maulana | Bagas Setiawan | Ilham Akbar | Yoga Prasetyo | Raka Firmansyah | Siti Rahmawati | Ayu Lestari | Nadia Putri | Dewi Anggraini | Nur Aisyah | Fitri Handayani | Intan Permata | Maya Safitri | Rani Oktaviani | Putri Maharani
+program studi, jurusan, prodi => Teknik Informatika | Teknik Industri | Sistem Informasi | Matematika | Teknik Elektro
+angkatan, tahun angkatan => 2022 | 2023 | 2024 | 2025
+rekomendasi program studi => Teknik Informatika | Teknik Industri | Sistem Informasi | Matematika | Teknik Elektro
+saran, masukan, komentar => Sudah cukup baik dan mudah dipahami | Semoga informasinya semakin lengkap | Tampilan sudah jelas dan nyaman digunakan
+kota, domisili, asal daerah => Jakarta | Bandung | Surabaya | Yogyakarta | Semarang
+email => responden01@gmail.com | responden02@gmail.com | responden03@gmail.com
+no hp, nomor hp, telepon, whatsapp => 081234567890 | 082112345678 | 085712345678`
+    };
+
+    const $ = id => document.getElementById(id);
+
+    $('openClawDefault').onclick = () => {
+      $('provider').value = 'openclaw';
+      $('baseUrl').value = defaults.baseUrl;
+      $('model').value = defaults.model;
+      $('apiKey').value = '';
+      $('configStatus').textContent = 'OpenClaw default aktif. Pastikan OpenClaw Gateway sudah jalan.';
+    };
+
+    $('provider').onchange = () => {
+      if ($('provider').value === 'openclaw') {
+        $('baseUrl').value = defaults.baseUrl;
+        $('model').value = defaults.model;
+      } else if ($('provider').value === 'openai') {
+        $('baseUrl').value = 'https://api.openai.com/v1/responses';
+        $('model').value = 'chat-latest';
+      }
+    };
+
+    $('saveConfig').onclick = async () => {
+      const res = await fetch('/api/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(readConfig())
+      });
+      const data = await res.json();
+      $('configStatus').textContent = data.ok ? 'Config tersimpan.' : data.error;
+    };
+
+    $('testAi').onclick = async () => {
+      $('configStatus').textContent = 'Mengecek koneksi AI...';
+      try {
+        const res = await fetch('/api/test-ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(readConfig())
+        });
+        const data = await res.json();
+        $('configStatus').textContent = data.ok
+          ? `AI konek: ${data.endpoint}`
+          : `AI belum konek: ${data.error}`;
+      } catch (err) {
+        $('configStatus').textContent = `AI belum konek: ${err.message}`;
+      }
+    };
+
+    $('start').onclick = async () => {
+      $('runStatus').textContent = 'Menjalankan sistem...';
+      const res = await fetch('/api/run', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...readConfig(),
+          links: $('links').value,
+          responsesPerLink: Number($('responsesPerLink').value || 1),
+          headless: $('headless').value === 'true'
+        })
+      });
+      const data = await res.json();
+      $('runStatus').textContent = data.ok ? 'Sistem berjalan.' : data.error;
+    };
+
+    $('stop').onclick = async () => {
+      await fetch('/api/stop', { method: 'POST' });
+      $('runStatus').textContent = 'Stop diminta.';
+    };
+
+    function readConfig() {
+      return {
+        provider: $('provider').value,
+        baseUrl: $('baseUrl').value.trim(),
+        model: $('model').value.trim(),
+        apiKey: $('apiKey').value.trim(),
+        customRulesText: $('rules').value.trim()
+      };
+    }
+
+    async function refresh() {
+      const res = await fetch('/api/state');
+      const state = await res.json();
+      if (!document.activeElement || document.activeElement.id !== 'rules') {
+        $('rules').value ||= state.config.customRulesText || defaults.customRulesText;
+      }
+      if (!document.activeElement || document.activeElement.id !== 'links') {
+        $('links').value ||= state.config.links ?? defaults.links;
+      }
+      $('provider').value ||= state.config.provider || defaults.provider;
+      $('baseUrl').value ||= state.config.baseUrl || defaults.baseUrl;
+      $('model').value ||= state.config.model || defaults.model;
+      $('runStatus').textContent = state.running ? 'Sistem berjalan.' : 'Idle.';
+      $('log').innerHTML = state.logs.map(item => `<span class="${item.level}">[${item.time}] ${escapeHtml(item.message)}</span>`).join('\\n');
+      $('log').scrollTop = $('log').scrollHeight;
+    }
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, ch => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[ch]));
+    }
+
+    refresh();
+    setInterval(refresh, 1200);
+  </script>
+</body>
+</html>

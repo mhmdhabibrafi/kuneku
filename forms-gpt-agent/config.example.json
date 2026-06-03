@@ -1,0 +1,31 @@
+{
+  "systemName": "KUNEKU",
+  "ownerName": "Muhammad Habib Rafi",
+  "provider": "openclaw",
+  "baseUrl": "http://localhost:18789/v1/responses",
+  "model": "openai-codex/gpt-5.4",
+  "apiKey": "",
+  "customRulesText": "domisili negara, tinggal di negara, country of residence => Indonesia\nplatform e-commerce, marketplace yang digunakan => Shopee | Tokopedia | Lazada\nnama, nama lengkap => Aditya Pratama | Ahmad Fauzan | Bima Saputra | Siti Rahmawati | Ayu Lestari\nemail => responden01@gmail.com | responden02@gmail.com | responden03@gmail.com\nno hp, nomor hp, telepon, whatsapp => 081234567890 | 082112345678 | 085712345678",
+  "links": "",
+  "profiles": {},
+  "runItems": [],
+  "responsesPerLink": 1,
+  "headless": true,
+  "dryRun": true,
+  "smartAutoMode": true,
+  "localLikertAlways": true,
+  "disableFastLikert": true,
+  "fastMode": true,
+  "reviewBeforeSubmit": true,
+  "storage": {
+    "type": "local",
+    "mysql": {
+      "host": "127.0.0.1",
+      "port": 3306,
+      "database": "kuneku",
+      "user": "kuneku_app",
+      "password": ""
+    }
+  }
+}
+
