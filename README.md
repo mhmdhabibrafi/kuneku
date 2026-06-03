@@ -1,10 +1,16 @@
-# KUNEKU
+<p align="center">
+  <img src="forms-gpt-agent/public/images/kuneku-logo.png" alt="KUNEKU Logo" width="150">
+</p>
 
-![Version](https://img.shields.io/badge/version-v1.1-0cc0df)
-![Node.js](https://img.shields.io/badge/Node.js-LTS-339933)
-![React](https://img.shields.io/badge/React-19-61dafb)
-![Windows](https://img.shields.io/badge/Control%20Panel-WinForms-0078d4)
-![License](https://img.shields.io/badge/license-Proprietary-111827)
+<h1 align="center">KUNEKU</h1>
+
+<p align="center">
+  <img alt="Version" src="https://img.shields.io/badge/version-v1.1-0cc0df">
+  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-LTS-339933">
+  <img alt="React" src="https://img.shields.io/badge/React-19-61dafb">
+  <img alt="Control Panel" src="https://img.shields.io/badge/Control%20Panel-WinForms-0078d4">
+  <img alt="License" src="https://img.shields.io/badge/license-Proprietary-111827">
+</p>
 
 KUNEKU adalah sistem otomasi Google Forms lokal untuk membaca struktur form, membuat jawaban kontekstual, mengisi form dengan Playwright, dan menyimpan report lewat Local JSON atau MySQL.
 
